@@ -4,17 +4,12 @@ from abc import ABC, abstractmethod
 
 class Context:
     """
-    The Context defines the interface of interest to clients. It also maintains
-    a reference to an instance of a State subclass, which represents the current
-    state of the Context.
-    """
-    """
-    El contexto define la interfaz de interes a los clientes. Tambien mantiene una referencia
-    a una instancia de una subclase de estado, el cual representa el estado actual del Contexto
+    El contexto define la interfaz de interés para los clientes. También mantiene una referencia 
+    a una instancia de una subclase State, que representa el estado actual de Context.
     """
     _state = None
     """
-    A reference to the current state of the Context.
+    Una referencia al estado actual de Context.
     """
 
     def __init__(self, state: State) -> None:
@@ -22,7 +17,7 @@ class Context:
 
     def transition_to(self, state: State):
         """
-        The Context allows changing the State object at runtime.
+        El contexto permite cambiar el objeto State en tiempo de ejecución.
         """
 
         print(f"Context: Transition to {type(state).__name__}")
@@ -30,7 +25,7 @@ class Context:
         self._state.context = self
 
     """
-    The Context delegates part of its behavior to the current State object.
+    El Context delega parte de su comportamiento en el objeto State actual.
     """
 
     def request1(self):
@@ -42,10 +37,10 @@ class Context:
 
 class State(ABC):
     """
-    The base State class declares methods that all Concrete State should
-    implement and also provides a backreference to the Context object,
-    associated with the State. This backreference can be used by States to
-    transition the Context to another State.
+     La clase State base declara los métodos que todos los Concrete State deben 
+     implementar y también proporciona una referencia inversa al objeto Context, 
+     asociado con el State. Esta referencia inversa puede ser utilizada por States
+     para realizar la transición de Context a otro State.
     """
 
     @property
@@ -66,8 +61,8 @@ class State(ABC):
 
 
 """
-Concrete States implement various behaviors, associated with a state of the
-Context.
+Los estados concretos implementan varios comportamientos, asociados con un estado del
+Contexto.
 """
 
 
@@ -92,7 +87,7 @@ class ConcreteStateB(State):
 
 
 if __name__ == "__main__":
-    # The client code.
+    # Codigo del cliente.
 
     context = Context(ConcreteStateA())
     context.request1()
